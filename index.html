@@ -26,10 +26,10 @@
       <!-- HIRO MARKER -->
       <a-marker preset="hiro">
 
-        <!-- HELMET (SIDE VIEW - UNCHANGED) -->
+        <!-- HELMET (SIDE VIEW + UPSIDE DOWN) -->
         <a-entity
           position="-0.5 0.3 0"
-          rotation="0 90 0"
+          rotation="180 90 0"
           scale="0.6 0.6 0.6">
 
           <!-- Helmet Base -->
@@ -50,13 +50,14 @@
 
         <!-- INSTRUCTIONS (TOP TO BOTTOM) -->
 
-        <!-- STEP 1 (TOP MOST) -->
+        <!-- STEP 1 -->
         <a-text
           value="1. Wear the helmet properly"
-          position="0.4 1.2 0"
+          position="0.4 1.25 0"
           align="center"
-          color="#ff0000"
-          width="1.2">
+          color="#FF0000"
+          width="2.5"
+          scale="1.4 1.4 1.4">
         </a-text>
 
         <!-- STEP 2 -->
@@ -64,26 +65,29 @@
           value="2. Fasten the chin strap securely"
           position="0.4 1.0 0"
           align="center"
-          color="#000000"
-          width="1.2">
+          color="#FFD700"
+          width="2.5"
+          scale="1.4 1.4 1.4">
         </a-text>
 
         <!-- STEP 3 -->
         <a-text
           value="3. Check sensors before use"
-          position="0.4 0.8 0"
+          position="0.4 0.75 0"
           align="center"
-          color="#000000"
-          width="1.2">
+          color="#FFA500"
+          width="2.6"
+          scale="1.4 1.4 1.4">
         </a-text>
 
-        <!-- STEP 4 (BOTTOM MOST) -->
+        <!-- STEP 4 -->
         <a-text
           value="4. Do not use a damaged helmet"
-          position="0.4 0.6 0"
+          position="0.4 0.5 0"
           align="center"
-          color="#000000"
-          width="1.2">
+          color="#00AA00"
+          width="2.6"
+          scale="1.4 1.4 1.4">
         </a-text>
 
       </a-marker>
