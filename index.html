@@ -16,12 +16,11 @@
 
 <a-scene
   embedded
-  arjs="sourceType: webcam; debugUIEnabled: false;"
-  id="scene">
+  arjs="sourceType: webcam; debugUIEnabled: false;">
 
   <a-marker preset="hiro">
 
-    <!-- HEAD (SLIGHTLY TILTED UP) -->
+    <!-- HEAD -->
     <a-sphere
       position="0 0.5 0"
       radius="0.25"
@@ -29,7 +28,7 @@
       rotation="-10 0 0">
     </a-sphere>
 
-    <!-- HELMET (TILTED UPWARDS) -->
+    <!-- HELMET -->
     <a-entity
       position="0 0.75 0"
       rotation="-75 0 180"
@@ -49,7 +48,7 @@
 
     </a-entity>
 
-    <!-- INSTRUCTION TEXT (SLIGHTLY SMALLER FONT) -->
+    <!-- INSTRUCTION TEXT (REDUCED FONT MORE) -->
     <a-text
       id="instructionText"
       value="1. Wear the helmet properly"
@@ -57,7 +56,7 @@
       align="center"
       color="red"
       width="4"
-      scale="1.8 1.8 1.8">
+      scale="1.4 1.4 1.4">
     </a-text>
 
   </a-marker>
