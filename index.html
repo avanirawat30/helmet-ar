@@ -4,93 +4,69 @@
     <meta charset="utf-8">
     <title>Safe Guard Helmet AR User Guide</title>
 
-    <!-- A-Frame -->
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-
-    <!-- AR.js -->
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
 
     <style>
-      body {
-        margin: 0;
-        overflow: hidden;
-      }
+      body { margin: 0; overflow: hidden; }
     </style>
   </head>
 
   <body>
-    <a-scene
-      embedded
-      arjs="sourceType: webcam; debugUIEnabled: false;">
+    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
 
-      <!-- HIRO MARKER -->
       <a-marker preset="hiro">
 
-        <!-- HELMET (SIDE VIEW - UNCHANGED) -->
+        <!-- HELMET (SIDEWAYS + UPSIDE DOWN, SAFE ROTATION) -->
         <a-entity
           position="-0.5 0.3 0"
-          rotation="0 90 0"
+          rotation="180 90 180"
           scale="0.6 0.6 0.6">
 
-          <!-- Helmet Base -->
-          <a-cylinder
-            radius="0.25"
-            height="0.18"
-            color="#1e90ff">
-          </a-cylinder>
-
-          <!-- Helmet Dome -->
-          <a-sphere
-            position="0 0.15 0"
-            radius="0.28"
-            color="#4682b4">
-          </a-sphere>
+          <a-cylinder radius="0.25" height="0.18" color="#1e90ff"></a-cylinder>
+          <a-sphere position="0 0.15 0" radius="0.28" color="#4682b4"></a-sphere>
 
         </a-entity>
 
-        <!-- INSTRUCTIONS (TOP TO BOTTOM) -->
-
-        <!-- STEP 1 (TOP MOST) -->
-        <a-text
-          value="1. Wear the helmet properly"
-          position="0.4 1.2 0"
+        <!-- STEP 1 -->
+        <a-text value="1. Wear the helmet properly"
+          position="0.4 1.25 0"
           align="center"
-          color="#ff0000"
-          width="1.2">
+          color="#FF0000"
+          width="2.5"
+          scale="1.4 1.4 1.4">
         </a-text>
 
         <!-- STEP 2 -->
-        <a-text
-          value="2. Fasten the chin strap securely"
+        <a-text value="2. Fasten the chin strap securely"
           position="0.4 1.0 0"
           align="center"
-          color="#000000"
-          width="1.2">
+          color="#FFD700"
+          width="2.5"
+          scale="1.4 1.4 1.4">
         </a-text>
 
         <!-- STEP 3 -->
-        <a-text
-          value="3. Check sensors before use"
-          position="0.4 0.8 0"
+        <a-text value="3. Check sensors before use"
+          position="0.4 0.75 0"
           align="center"
-          color="#000000"
-          width="1.2">
+          color="#FFA500"
+          width="2.6"
+          scale="1.4 1.4 1.4">
         </a-text>
 
-        <!-- STEP 4 (BOTTOM MOST) -->
-        <a-text
-          value="4. Do not use a damaged helmet"
-          position="0.4 0.6 0"
+        <!-- STEP 4 -->
+        <a-text value="4. Do not use a damaged helmet"
+          position="0.4 0.5 0"
           align="center"
-          color="#000000"
-          width="1.2">
+          color="#00AA00"
+          width="2.6"
+          scale="1.4 1.4 1.4">
         </a-text>
 
       </a-marker>
 
-      <!-- CAMERA -->
       <a-entity camera></a-entity>
-
     </a-scene>
   </body>
 </html>
