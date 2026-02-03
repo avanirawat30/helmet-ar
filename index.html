@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Helmet AR Safety Guide</title>
+  <title>Helmet AR Simulation (Loop)</title>
 
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
@@ -24,94 +24,58 @@
       color="#f2c9ac">
     </a-sphere>
 
-    <!-- STRAP (TORUS AROUND HEAD – ALWAYS VISIBLE) -->
-    <a-torus
-      position="0 0.45 0"
-      radius="0.27"
-      radius-tubular="0.02"
-      rotation="90 0 0"
-      color="#000000">
-    </a-torus>
-
-    <!-- GREEN HELMET (SAFE) -->
+    <!-- HELMET -->
     <a-entity
-      id="helmet-green"
       position="0 0.75 0"
-      rotation="-90 0 0"
-      scale="0.6 0.6 0.6"
-      visible="true">
+      rotation="-90 0 180"
+      scale="0.6 0.6 0.6">
 
-      <a-cylinder
-        radius="0.28"
-        height="0.2"
-        material="color:#00ff00; emissive:#00ff00; emissiveIntensity:1">
-      </a-cylinder>
-
-      <a-sphere
-        position="0 0.15 0"
-        radius="0.3"
-        material="color:#00ff00; emissive:#00ff00; emissiveIntensity:1">
-      </a-sphere>
-
-      <!-- Hide after 6 seconds -->
-      <a-animation
-        attribute="visible"
-        from="true"
-        to="false"
-        begin="6000"
-        dur="1">
-      </a-animation>
-
+      <a-cylinder radius="0.28" height="0.2" color="#1e90ff"></a-cylinder>
+      <a-sphere position="0 0.15 0" radius="0.3" color="#4682b4"></a-sphere>
     </a-entity>
 
-    <!-- RED HELMET (UNSAFE) -->
-    <a-entity
-      id="helmet-red"
-      position="0 0.75 0"
-      rotation="-90 0 0"
-      scale="0.6 0.6 0.6"
-      visible="false">
-
-      <a-cylinder
-        radius="0.28"
-        height="0.2"
-        material="color:#ff0000; emissive:#ff0000; emissiveIntensity:1.2">
-      </a-cylinder>
-
-      <a-sphere
-        position="0 0.15 0"
-        radius="0.3"
-        material="color:#ff0000; emissive:#ff0000; emissiveIntensity:1.2">
-      </a-sphere>
-
-      <!-- Show after 6 seconds -->
-      <a-animation
-        attribute="visible"
-        from="false"
-        to="true"
-        begin="6000"
-        dur="1">
-      </a-animation>
-
-    </a-entity>
-
-    <!-- TEXT INSTRUCTIONS -->
+    <!-- STEP 1 -->
     <a-text
-      value="STEP 3: HELMET SAFE"
-      position="0 1.4 0"
-      align="center"
-      color="green"
-      width="4"
-      scale="2 2 2">
-    </a-text>
-
-    <a-text
-      value="STEP 4: DO NOT USE DAMAGED HELMET"
-      position="0 1.1 0"
+      value="1. Wear the helmet properly"
+      position="0 1.3 0"
       align="center"
       color="red"
       width="4"
-      scale="2 2 2">
+      scale="2 2 2"
+      visible="true">
+
+      <!-- hide -->
+      <a-animation attribute="visible" from="true" to="false" begin="4000" dur="1"></a-animation>
+      <!-- show again (loop) -->
+      <a-animation attribute="visible" from="false" to="true" begin="12000" dur="1"></a-animation>
+    </a-text>
+
+    <!-- STEP 2 -->
+    <a-text
+      value="2. Fasten the chin strap securely"
+      position="0 1.3 0"
+      align="center"
+      color="orange"
+      width="4"
+      scale="2 2 2"
+      visible="false">
+
+      <a-animation attribute="visible" from="false" to="true" begin="4000" dur="1"></a-animation>
+      <a-animation attribute="visible" from="true" to="false" begin="8000" dur="1"></a-animation>
+    </a-text>
+
+    <!-- STEP 3 -->
+    <a-text
+      value="3. Helmet ready and safe to use"
+      position="0 1.3 0"
+      align="center"
+      color="green"
+      width="4"
+      scale="2 2 2"
+      visible="false">
+
+      <a-animation attribute="visible" from="false" to="true" begin="8000" dur="1"></a-animation>
+      <a-animation attribute="visible" from="true" to="false" begin="12000" dur="1"></a-animation>
     </a-text>
 
   </a-marker>
