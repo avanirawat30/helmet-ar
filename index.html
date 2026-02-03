@@ -10,32 +10,6 @@
     <!-- AR.js -->
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
 
-    <!-- Step switching logic -->
-    <script>
-      AFRAME.registerComponent('step-switcher', {
-        init: function () {
-          const steps = [
-            document.querySelector('#step1'),
-            document.querySelector('#step2'),
-            document.querySelector('#step3'),
-            document.querySelector('#step4')
-          ];
-
-          let current = 0;
-
-          steps.forEach((s, i) => {
-            s.setAttribute('visible', i === 0);
-          });
-
-          setInterval(() => {
-            steps[current].setAttribute('visible', false);
-            current = (current + 1) % steps.length;
-            steps[current].setAttribute('visible', true);
-          }, 3000); // 3 seconds per step
-        }
-      });
-    </script>
-
     <style>
       body {
         margin: 0;
@@ -50,20 +24,22 @@
       arjs="sourceType: webcam; debugUIEnabled: false;">
 
       <!-- HIRO MARKER -->
-      <a-marker preset="hiro" step-switcher>
+      <a-marker preset="hiro">
 
-        <!-- HELMET (SIDE VIEW - SAME POSITION) -->
+        <!-- HELMET (SIDE VIEW - UNCHANGED) -->
         <a-entity
           position="-0.5 0.3 0"
           rotation="0 90 0"
           scale="0.6 0.6 0.6">
 
+          <!-- Helmet Base -->
           <a-cylinder
             radius="0.25"
             height="0.18"
             color="#1e90ff">
           </a-cylinder>
 
+          <!-- Helmet Dome -->
           <a-sphere
             position="0 0.15 0"
             radius="0.28"
@@ -72,48 +48,42 @@
 
         </a-entity>
 
-        <!-- STEP 1 -->
+        <!-- INSTRUCTIONS (TOP TO BOTTOM) -->
+
+        <!-- STEP 1 (TOP MOST) -->
         <a-text
-          id="step1"
-          value="1. WEAR THE HELMET PROPERLY"
+          value="1. Wear the helmet properly"
           position="0.4 1.2 0"
           align="center"
-          color="#FFD700"
-          width="2.5"
-          scale="1.5 1.5 1.5">
+          color="#ff0000"
+          width="1.2">
         </a-text>
 
         <!-- STEP 2 -->
         <a-text
-          id="step2"
-          value="2. FASTEN THE CHIN STRAP"
-          position="0.4 1.2 0"
+          value="2. Fasten the chin strap securely"
+          position="0.4 1.0 0"
           align="center"
-          color="#FF0000"
-          width="2.5"
-          scale="1.5 1.5 1.5">
+          color="#000000"
+          width="1.2">
         </a-text>
 
         <!-- STEP 3 -->
         <a-text
-          id="step3"
-          value="3. CHECK SENSORS BEFORE USE"
-          position="0.4 1.2 0"
+          value="3. Check sensors before use"
+          position="0.4 0.8 0"
           align="center"
-          color="#FFD700"
-          width="2.8"
-          scale="1.5 1.5 1.5">
+          color="#000000"
+          width="1.2">
         </a-text>
 
-        <!-- STEP 4 -->
+        <!-- STEP 4 (BOTTOM MOST) -->
         <a-text
-          id="step4"
-          value="4. DO NOT USE DAMAGED HELMET"
-          position="0.4 1.2 0"
+          value="4. Do not use a damaged helmet"
+          position="0.4 0.6 0"
           align="center"
-          color="#FF0000"
-          width="2.8"
-          scale="1.5 1.5 1.5">
+          color="#000000"
+          width="1.2">
         </a-text>
 
       </a-marker>
