@@ -8,49 +8,47 @@
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
 
   <script>
-    AFRAME.registerComponent('helmet-simulation', {
+    AFRAME.registerComponent('helmet-steps', {
       init: function () {
-        const helmet = document.querySelector('#helmet');
-        const strap = document.querySelector('#strap');
-        const text = document.querySelector('#instruction');
+        const marker = this.el;
+
+        const helmet = marker.querySelector('#helmet');
+        const strap = marker.querySelector('#strap');
+        const text = marker.querySelector('#text');
 
         let step = 0;
 
         setInterval(() => {
           step = (step + 1) % 4;
 
+          // STEP 1: Wear helmet
           if (step === 0) {
-            text.setAttribute('value', '1. Wear the helmet properly');
+            text.setAttribute('value', '1. WEAR THE HELMET PROPERLY');
             text.setAttribute('color', 'red');
-
             helmet.setAttribute('position', '-0.5 0.4 0');
-            helmet.setAttribute('material', 'color: #1e90ff');
-
             strap.setAttribute('visible', false);
+            helmet.setAttribute('material', 'color:#1e90ff');
           }
 
+          // STEP 2: Fasten strap
           if (step === 1) {
-            text.setAttribute('value', '2. Fasten the chin strap');
+            text.setAttribute('value', '2. FASTEN THE CHIN STRAP');
             text.setAttribute('color', 'yellow');
-
             strap.setAttribute('visible', true);
           }
 
+          // STEP 3: Check sensors
           if (step === 2) {
-            text.setAttribute('value', '3. Checking sensors...');
+            text.setAttribute('value', '3. CHECKING SENSORS...');
             text.setAttribute('color', 'orange');
-
-            helmet.setAttribute('animation__glow',
-              'property: material.color; from: #1e90ff; to: #00ff00; dur: 800; dir: alternate; loop: true'
-            );
+            helmet.setAttribute('material', 'color:#00ff00');
           }
 
+          // STEP 4: Warning
           if (step === 3) {
-            text.setAttribute('value', '4. Damaged helmet – DO NOT USE');
+            text.setAttribute('value', '4. DAMAGED HELMET - DO NOT USE');
             text.setAttribute('color', 'green');
-
-            helmet.setAttribute('material', 'color: red');
-            helmet.removeAttribute('animation__glow');
+            helmet.setAttribute('material', 'color:red');
           }
 
         }, 3000);
@@ -65,8 +63,8 @@
 
 <body>
 <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
-  
-  <a-marker preset="hiro" helmet-simulation>
+
+  <a-marker preset="hiro" helmet-steps>
 
     <!-- HELMET -->
     <a-entity id="helmet"
@@ -76,9 +74,10 @@
 
       <a-cylinder radius="0.25" height="0.18" color="#1e90ff"></a-cylinder>
       <a-sphere position="0 0.15 0" radius="0.28" color="#4682b4"></a-sphere>
+
     </a-entity>
 
-    <!-- CHIN STRAP -->
+    <!-- STRAP -->
     <a-cylinder id="strap"
       position="-0.5 0.1 0.2"
       radius="0.02"
@@ -87,9 +86,9 @@
       visible="false">
     </a-cylinder>
 
-    <!-- INSTRUCTION TEXT -->
-    <a-text id="instruction"
-      value="1. Wear the helmet properly"
+    <!-- TEXT -->
+    <a-text id="text"
+      value="1. WEAR THE HELMET PROPERLY"
       position="0.4 1.2 0"
       align="center"
       color="red"
