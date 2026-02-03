@@ -1,72 +1,105 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Safe Guard Helmet AR User Guide</title>
+<head>
+  <meta charset="utf-8">
+  <title>Safe Guard Helmet AR Simulation</title>
 
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
 
-    <style>
-      body { margin: 0; overflow: hidden; }
-    </style>
-  </head>
+  <script>
+    AFRAME.registerComponent('helmet-simulation', {
+      init: function () {
+        const helmet = document.querySelector('#helmet');
+        const strap = document.querySelector('#strap');
+        const text = document.querySelector('#instruction');
 
-  <body>
-    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
+        let step = 0;
 
-      <a-marker preset="hiro">
+        setInterval(() => {
+          step = (step + 1) % 4;
 
-        <!-- HELMET (SIDEWAYS + UPSIDE DOWN, SAFE ROTATION) -->
-        <a-entity
-          position="-0.5 0.3 0"
-          rotation="180 90 180"
-          scale="0.6 0.6 0.6">
+          if (step === 0) {
+            text.setAttribute('value', '1. Wear the helmet properly');
+            text.setAttribute('color', 'red');
 
-          <a-cylinder radius="0.25" height="0.18" color="#1e90ff"></a-cylinder>
-          <a-sphere position="0 0.15 0" radius="0.28" color="#4682b4"></a-sphere>
+            helmet.setAttribute('position', '-0.5 0.4 0');
+            helmet.setAttribute('material', 'color: #1e90ff');
 
-        </a-entity>
+            strap.setAttribute('visible', false);
+          }
 
-        <!-- STEP 1 -->
-        <a-text value="1. Wear the helmet properly"
-          position="0.4 1.25 0"
-          align="center"
-          color="#FF0000"
-          width="2.5"
-          scale="1.4 1.4 1.4">
-        </a-text>
+          if (step === 1) {
+            text.setAttribute('value', '2. Fasten the chin strap');
+            text.setAttribute('color', 'yellow');
 
-        <!-- STEP 2 -->
-        <a-text value="2. Fasten the chin strap securely"
-          position="0.4 1.0 0"
-          align="center"
-          color="#FFD700"
-          width="2.5"
-          scale="1.4 1.4 1.4">
-        </a-text>
+            strap.setAttribute('visible', true);
+          }
 
-        <!-- STEP 3 -->
-        <a-text value="3. Check sensors before use"
-          position="0.4 0.75 0"
-          align="center"
-          color="#FFA500"
-          width="2.6"
-          scale="1.4 1.4 1.4">
-        </a-text>
+          if (step === 2) {
+            text.setAttribute('value', '3. Checking sensors...');
+            text.setAttribute('color', 'orange');
 
-        <!-- STEP 4 -->
-        <a-text value="4. Do not use a damaged helmet"
-          position="0.4 0.5 0"
-          align="center"
-          color="#00AA00"
-          width="2.6"
-          scale="1.4 1.4 1.4">
-        </a-text>
+            helmet.setAttribute('animation__glow',
+              'property: material.color; from: #1e90ff; to: #00ff00; dur: 800; dir: alternate; loop: true'
+            );
+          }
 
-      </a-marker>
+          if (step === 3) {
+            text.setAttribute('value', '4. Damaged helmet – DO NOT USE');
+            text.setAttribute('color', 'green');
 
-      <a-entity camera></a-entity>
-    </a-scene>
-  </body>
+            helmet.setAttribute('material', 'color: red');
+            helmet.removeAttribute('animation__glow');
+          }
+
+        }, 3000);
+      }
+    });
+  </script>
+
+  <style>
+    body { margin: 0; overflow: hidden; }
+  </style>
+</head>
+
+<body>
+<a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
+  
+  <a-marker preset="hiro" helmet-simulation>
+
+    <!-- HELMET -->
+    <a-entity id="helmet"
+      position="-0.5 0.3 0"
+      rotation="0 90 0"
+      scale="0.6 0.6 0.6">
+
+      <a-cylinder radius="0.25" height="0.18" color="#1e90ff"></a-cylinder>
+      <a-sphere position="0 0.15 0" radius="0.28" color="#4682b4"></a-sphere>
+    </a-entity>
+
+    <!-- CHIN STRAP -->
+    <a-cylinder id="strap"
+      position="-0.5 0.1 0.2"
+      radius="0.02"
+      height="0.3"
+      color="black"
+      visible="false">
+    </a-cylinder>
+
+    <!-- INSTRUCTION TEXT -->
+    <a-text id="instruction"
+      value="1. Wear the helmet properly"
+      position="0.4 1.2 0"
+      align="center"
+      color="red"
+      width="3"
+      scale="1.5 1.5 1.5">
+    </a-text>
+
+  </a-marker>
+
+  <a-entity camera></a-entity>
+</a-scene>
+</body>
 </html>
