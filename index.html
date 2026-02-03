@@ -2,67 +2,10 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Helmet AR Safety Simulation</title>
+  <title>Helmet AR Safety Guide</title>
 
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-
-  <script>
-    AFRAME.registerComponent('helmet-steps', {
-      init: function () {
-        const marker = this.el;
-
-        const helmet = marker.querySelector('#helmet');
-        const text = marker.querySelector('#text');
-
-        let step = 0;
-
-        setInterval(() => {
-          step = (step + 1) % 4;
-
-          // STEP 1
-          if (step === 0) {
-            text.setAttribute('value', '1. WEAR THE HELMET PROPERLY');
-            text.setAttribute('color', 'red');
-            helmet.setAttribute('material', {
-              color: '#1e90ff',
-              emissive: '#000000',
-              emissiveIntensity: 0
-            });
-          }
-
-          // STEP 2
-          if (step === 1) {
-            text.setAttribute('value', '2. FASTEN THE CHIN STRAP');
-            text.setAttribute('color', 'yellow');
-          }
-
-          // STEP 3 – GREEN GLOW
-          if (step === 2) {
-            text.setAttribute('value', '3. HELMET SAFE – READY TO USE');
-            text.setAttribute('color', 'green');
-            helmet.setAttribute('material', {
-              color: '#00ff00',
-              emissive: '#00ff00',
-              emissiveIntensity: 1
-            });
-          }
-
-          // STEP 4 – RED GLOW
-          if (step === 3) {
-            text.setAttribute('value', '4. WARNING: DO NOT USE');
-            text.setAttribute('color', 'red');
-            helmet.setAttribute('material', {
-              color: '#ff0000',
-              emissive: '#ff0000',
-              emissiveIntensity: 1.2
-            });
-          }
-
-        }, 3000);
-      }
-    });
-  </script>
 
   <style>
     body { margin: 0; overflow: hidden; }
@@ -72,34 +15,103 @@
 <body>
 <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
 
-  <a-marker preset="hiro" helmet-steps>
+  <a-marker preset="hiro">
 
-    <!-- PERSON HEAD -->
+    <!-- HEAD -->
     <a-sphere
-      position="0 0.6 0"
+      position="0 0.5 0"
       radius="0.25"
       color="#f2c9ac">
     </a-sphere>
 
-    <!-- HELMET (UPWARD FACING ON HEAD) -->
-    <a-entity id="helmet"
-      position="0 0.85 0"
-      rotation="-90 0 0"
-      scale="0.6 0.6 0.6">
+    <!-- STRAP (TORUS AROUND HEAD – ALWAYS VISIBLE) -->
+    <a-torus
+      position="0 0.45 0"
+      radius="0.27"
+      radius-tubular="0.02"
+      rotation="90 0 0"
+      color="#000000">
+    </a-torus>
 
-      <a-cylinder radius="0.28" height="0.2"></a-cylinder>
-      <a-sphere position="0 0.15 0" radius="0.3"></a-sphere>
+    <!-- GREEN HELMET (SAFE) -->
+    <a-entity
+      id="helmet-green"
+      position="0 0.75 0"
+      rotation="-90 0 0"
+      scale="0.6 0.6 0.6"
+      visible="true">
+
+      <a-cylinder
+        radius="0.28"
+        height="0.2"
+        material="color:#00ff00; emissive:#00ff00; emissiveIntensity:1">
+      </a-cylinder>
+
+      <a-sphere
+        position="0 0.15 0"
+        radius="0.3"
+        material="color:#00ff00; emissive:#00ff00; emissiveIntensity:1">
+      </a-sphere>
+
+      <!-- Hide after 6 seconds -->
+      <a-animation
+        attribute="visible"
+        from="true"
+        to="false"
+        begin="6000"
+        dur="1">
+      </a-animation>
 
     </a-entity>
 
-    <!-- INSTRUCTION TEXT -->
-    <a-text id="text"
-      value="1. WEAR THE HELMET PROPERLY"
+    <!-- RED HELMET (UNSAFE) -->
+    <a-entity
+      id="helmet-red"
+      position="0 0.75 0"
+      rotation="-90 0 0"
+      scale="0.6 0.6 0.6"
+      visible="false">
+
+      <a-cylinder
+        radius="0.28"
+        height="0.2"
+        material="color:#ff0000; emissive:#ff0000; emissiveIntensity:1.2">
+      </a-cylinder>
+
+      <a-sphere
+        position="0 0.15 0"
+        radius="0.3"
+        material="color:#ff0000; emissive:#ff0000; emissiveIntensity:1.2">
+      </a-sphere>
+
+      <!-- Show after 6 seconds -->
+      <a-animation
+        attribute="visible"
+        from="false"
+        to="true"
+        begin="6000"
+        dur="1">
+      </a-animation>
+
+    </a-entity>
+
+    <!-- TEXT INSTRUCTIONS -->
+    <a-text
+      value="STEP 3: HELMET SAFE"
       position="0 1.4 0"
       align="center"
+      color="green"
+      width="4"
+      scale="2 2 2">
+    </a-text>
+
+    <a-text
+      value="STEP 4: DO NOT USE DAMAGED HELMET"
+      position="0 1.1 0"
+      align="center"
       color="red"
-      width="3"
-      scale="1.6 1.6 1.6">
+      width="4"
+      scale="2 2 2">
     </a-text>
 
   </a-marker>
