@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Safe-Guard Helmet AR Guide</title>
+
+    <!-- A-Frame -->
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+
+    <!-- AR.js -->
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/1.7.7/aframe/build/aframe-ar.js"></script>
+  </head>
+
+  <body style="margin:0; overflow:hidden;">
+    <a-scene embedded arjs="debugUIEnabled: false">
+
+      <!-- Helmet Marker -->
+      <a-marker preset="hiro">
+
+        <!-- Step 1: Helmet instruction -->
+        <a-text
+          value="Wear helmet properly"
+          position="0 1 0"
+          align="center"
+          color="green"
+          scale="1 1 1">
+        </a-text>
+
+        <!-- Step 2: Strap instruction -->
+        <a-text
+          value="Tighten chin strap"
+          position="0 0.7 0"
+          align="center"
+          color="yellow"
+          scale="0.8 0.8 0.8">
+        </a-text>
+
+        <!-- Step 3: Safety legend -->
+        <a-text
+          value="GREEN = SAFE | RED = DANGER"
+          position="0 0.4 0"
+          align="center"
+          color="red"
+          scale="0.7 0.7 0.7">
+        </a-text>
+
+        <!-- Arrow (simple cone) -->
+        <a-cone
+          position="0 0.2 0"
+          rotation="180 0 0"
+          radius-bottom="0.05"
+          height="0.2"
+          color="blue">
+        </a-cone>
+
+      </a-marker>
+
+      <!-- Camera -->
+      <a-entity camera></a-entity>
+
+    </a-scene>
+  </body>
+</html>
